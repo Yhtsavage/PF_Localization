@@ -3,7 +3,7 @@ sensor_model.py
 Provides a SensorModel class to calculate particle weights.
 """
 import rospy
-from util import getHeading
+from . util import getHeading
 
 import math
 
@@ -49,7 +49,7 @@ class SensorModel(object):
         self.reading_points = [(i, scan_angle_min +
                                 ((scan_angle_max - scan_angle_min) *
                                  (float(i) / scan_length)))
-                               for i in range(0, scan_length, reading_step)]
+                               for i in range(0, scan_length, int(reading_step))]
         
         rospy.loginfo("Sensor model scan parameters set.")
         
