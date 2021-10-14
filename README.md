@@ -21,7 +21,7 @@ This package implements the particle filter localisation using sensor and motion
 * Compile laser_trace.cpp (provides laser ray tracing) as follows:
 
         cd <catkin_ws>/src/pf_localisation/src/laser_trace
-        ./compile.sh
+        ./compile.sh #You may have to '''chmod +x compile.sh'''
 
 If correctly compiled, you should find `laser_trace.so` in the directory `<catkin_ws>/src/pf_localisation/src/pf_localisation`.
 If the ***code does not compile*** you need to install PythonBoost from https://github.com/boostorg/python. This requires the download and compiling of Boost and installation of Faber.
@@ -42,7 +42,7 @@ The localisation node can be tested in stage simulation (without the need for ro
 
         roscore
         rosrun map_server map_server <catkin_ws>/map.yaml
-        rosrun stage_ros stageros <catkin_ws>/src/socspioneer/data/lgfloor.world
+        rosrun stage_ros stageros <catkin_ws>/src/socspioneer/data/meeting.world
         roslaunch socspioneer keyboard_teleop.launch  # ---- run only if you want to move robot using keyboard 
         rosrun pf_localisation node.py    # ----- requires laser_trace, and completed pf.py methods.
 
