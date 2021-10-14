@@ -39,12 +39,14 @@ If the ***code does not compile*** you need to install PythonBoost from https://
 #### In simulated world:
 
 The localisation node can be tested in stage simulation (without the need for robot).
+
         roscore
         rosrun map_server map_server <catkin_ws>/map.yaml
         rosrun stage_ros stageros <catkin_ws>/src/socspioneer/data/lgfloor.world
         roslaunch socspioneer keyboard_teleop.launch  # ---- run only if you want to move robot using keyboard 
         rosrun pf_localisation node.py    # ----- requires laser_trace, and completed pf.py methods.
 
+**Don't forget to make node.py executable by using ```chmod +x node.py```**
 
 ### Published Topics:
 
