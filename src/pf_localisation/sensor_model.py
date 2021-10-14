@@ -7,7 +7,7 @@ from . util import getHeading
 
 import math
 
-import laser_trace
+from . import laser_trace
 
 PI_OVER_TWO = math.pi/2 
 
