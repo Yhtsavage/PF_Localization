@@ -65,8 +65,8 @@ class PFLocaliserBase(object):
                                                                     self.INIT_HEADING)
         # ----- NOTE: Currently not making use of covariance matrix
         
-        self.estimatedpose.header.frame_id = "/map"
-        self.particlecloud.header.frame_id = "/map"
+        self.estimatedpose.header.frame_id = "map"
+        self.particlecloud.header.frame_id = "map"
         
         # ----- Sensor model
         self.sensor_model =  sensor_model.SensorModel()
@@ -105,7 +105,7 @@ class PFLocaliserBase(object):
             t = time.time()
             # ----- Call user-implemented particle filter update method
             self.update_particle_cloud(scan)
-            self.particlecloud.header.frame_id = "/map"
+            self.particlecloud.header.frame_id = "map"
             self.estimatedpose.pose.pose = self.estimate_pose()
             currentTime = rospy.Time.now()
             
@@ -184,7 +184,7 @@ class PFLocaliserBase(object):
         # ----- tf tree
         new_tfstamped = TransformStamped()
         new_tfstamped.child_frame_id = "/odom"
-        new_tfstamped.header.frame_id = "/map"
+        new_tfstamped.header.frame_id = "map"
         new_tfstamped.header.stamp = currentTime
         new_tfstamped.transform = transform
 
@@ -270,7 +270,7 @@ class PFLocaliserBase(object):
         # ----- particle cloud around it
         rospy.loginfo("Got pose. Calling initialise_particle_cloud().")
         self.particlecloud = self.initialise_particle_cloud(self.estimatedpose)
-        self.particlecloud.header.frame_id = "/map"
+        self.particlecloud.header.frame_id = "map"
     
     def set_map(self, occupancy_map):
         """ Set the map for localisation """
@@ -279,4 +279,4 @@ class PFLocaliserBase(object):
         # ----- Map has changed, so we should reinitialise the particle cloud
         rospy.loginfo("Particle filter got map. (Re)initialising.")
         self.particlecloud = self.initialise_particle_cloud(self.estimatedpose)
-        self.particlecloud.header.frame_id = "/map"
+        self.particlecloud.header.frame_id = "map"
