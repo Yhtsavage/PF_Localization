@@ -18,10 +18,12 @@ This package implements the particle filter localisation using sensor and motion
         
         catkin_make    # ----- run from root directory of catkin workspace
 
-* Compile laser_trace.cpp (provides laser ray tracing) as follows:
+* Compile laser_trace.cpp (provides laser ray tracing) as follows **if you are not using arm system(windows, unix...)**:
 
         cd <catkin_ws>/src/pf_localisation/src/laser_trace
         ./compile.sh #You may have to '''chmod +x compile.sh'''
+
+* replace `./compile.sh` with `./compilearm.sh`  **if you are using arm system(m1 chip mac)**:
 
 If correctly compiled, you should find `laser_trace.so` in the directory `<catkin_ws>/src/pf_localisation/src/pf_localisation`.
 If the ***code does not compile*** you need to install PythonBoost from https://github.com/boostorg/python. This requires the download and compiling of Boost and installation of Faber.
