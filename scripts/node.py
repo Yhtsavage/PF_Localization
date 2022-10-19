@@ -93,6 +93,7 @@ class ParticleFilterLocalisationNode(object):
                 self._amcl_pose_publisher.publish(self._particle_filter.estimatedpose)
                 estimatedpose =  PoseStamped()
                 estimatedpose.pose = self._particle_filter.estimatedpose.pose.pose
+                estimatedpose.header.stamp = self._particle_filter.estimatedpose.header.stamp
                 estimatedpose.header.frame_id = "map"
                 self._pose_publisher.publish(estimatedpose)
                 
