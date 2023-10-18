@@ -7,7 +7,7 @@ pf.PFLocaliser() to do the localisation.
 """
 
 import rospy
-import pf_localisation.pf
+import pf_localisation.pf 
 from pf_localisation.util import *
 
 from geometry_msgs.msg import ( PoseStamped, PoseWithCovarianceStamped,
@@ -32,11 +32,11 @@ class ParticleFilterLocalisationNode(object):
         self._last_published_pose = None
         self._initial_pose_received = False
 
-        self._pose_publisher = rospy.Publisher("/estimatedpose", PoseStamped)
+        self._pose_publisher = rospy.Publisher("/estimatedpose", PoseStamped,queue_size=100)
         self._amcl_pose_publisher = rospy.Publisher("/amcl_pose",
-                                                    PoseWithCovarianceStamped)
-        self._cloud_publisher = rospy.Publisher("/particlecloud", PoseArray)
-        self._tf_publisher = rospy.Publisher("/tf", tfMessage)
+                                                    PoseWithCovarianceStamped,queue_size=100)
+        self._cloud_publisher = rospy.Publisher("/particle_cloud", PoseArray,queue_size=100)
+        self._tf_publisher = rospy.Publisher("/tf", tfMessage,queue_size=100)
 
         rospy.loginfo("Waiting for a map...")
         try:
@@ -93,7 +93,6 @@ class ParticleFilterLocalisationNode(object):
                 self._amcl_pose_publisher.publish(self._particle_filter.estimatedpose)
                 estimatedpose =  PoseStamped()
                 estimatedpose.pose = self._particle_filter.estimatedpose.pose.pose
-                estimatedpose.header.stamp = self._particle_filter.estimatedpose.header.stamp
                 estimatedpose.header.frame_id = "map"
                 self._pose_publisher.publish(estimatedpose)
                 

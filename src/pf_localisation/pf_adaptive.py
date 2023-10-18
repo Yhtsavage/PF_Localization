@@ -99,6 +99,7 @@ class PFLocaliser(PFLocaliserBase):
         # Find the most dense cluster
         most_dense_cluster_id = max(cluster_counts, key=cluster_counts.get)
         label_num = cluster_counts[most_dense_cluster_id] # in terms of varing particle number overtime
+        self.CLOUD_POINTS = int(1.5*label_num)
         cluster_indices = [i for i, label in enumerate(labels) if label == most_dense_cluster_id]
         cluster_poses = [Poses[i] for i in cluster_indices]
 
@@ -278,4 +279,3 @@ class PFLocaliser(PFLocaliserBase):
         robotEstimatedPose  = self.particle_clustering(self.particlecloud.poses) # the second way to cluster
 
         return robotEstimatedPose #returns the new estimated pose
-
